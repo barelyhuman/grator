@@ -1,0 +1,46 @@
+{
+	"name": "grator",
+	"version": "0.0.0",
+	"description": "A mini tool to help with migration sql files",
+	"license": "MIT",
+	"repository": "barelyhuman/grator",
+	"author": {
+		"name": "Reaper",
+		"email": "ahoy@barelyhuman.dev",
+		"url": "https://reaper.im"
+	},
+	"type": "module",
+	"bin": {
+		"grator": "cli.js"
+	},
+	"engines": {
+		"node": ">=12"
+	},
+	"scripts": {
+		"test": "xo && ava"
+	},
+	"files": [
+		"cli.js",
+		"gator.js",
+		"lib/**/*.js"
+	],
+	"keywords": [
+		"cli",
+		"grator",
+		"migrations",
+		"sql",
+		"postgres"
+	],
+	"dependencies": {
+		"@barelyreaper/conch": "0.0.4",
+		"knex": "^0.95.4",
+		"meow": "^9.0.0",
+		"ora": "^5.4.0",
+		"pg": "^8.6.0"
+	},
+	"devDependencies": {
+		"ava": "^3.15.0",
+		"execa": "^5.0.0",
+		"xo": "^0.37.0"
+	}
+}
