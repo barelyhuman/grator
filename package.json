@@ -23,7 +23,7 @@
 	},
 	"files": [
 		"cli.js",
-		"gator.js",
+		"grator.js",
 		"lib/**/*.js"
 	],
 	"keywords": [

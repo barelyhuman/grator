@@ -8,7 +8,7 @@ const maxTries = 4
 let completedTries = 0
 let queriesToRun = []
 
-export async function gator (cliInput, cliArgs = { config: '', directory: '' }) {
+export async function grator (cliInput, cliArgs = { config: '', directory: '' }) {
   const spinner = ora('Starting').start()
   try {
     const configPath = path.resolve(cliArgs.config)
@@ -89,6 +89,6 @@ async function runQuery (db, queryItem) {
 
 function queryError (queries, err) {
   const errorLog = queries.map(item => item.query).join(';\n\n') + '\n' + String(err)
-  fs.writeFileSync('gator-error.log', errorLog)
-  console.error(new Error(`About ${queries.length} ${queries.length === 1 ? 'query' : 'queries'} failed to execute, please check them again, the failed one's can be found in gator-error.log`))
+  fs.writeFileSync('grator-error.log', errorLog)
+  console.error(new Error(`About ${queries.length} ${queries.length === 1 ? 'query' : 'queries'} failed to execute, please check them again, the failed one's can be found in grator-error.log`))
 }

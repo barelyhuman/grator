@@ -1,4 +1,4 @@
-# gator
+# grator
 
 Simple Utility to run migrations with a retry
 
@@ -8,25 +8,25 @@ cause a lot of issues when needed. The cli utility simply goes through the set o
 
 ### Installation 
 ```sh
-npm i -g @barelyreaper/gator
+npm i -g @barelyreaper/grator
 ```
 
 
 ### Usage 
 
 #### Requirements
-- A json config file named `gator.json` or anything as long as you point to it with the needed flag
+- A json config file named `grator.json` or anything as long as you point to it with the needed flag
 - A folder named `migrations` or any other folder with an `up.sql` and a `down.sql` file based on requirement
 
 ```sh
 Usage
-	  $ gator [up|down]
+	  $ grator [up|down]
 
 	Options
-	  --config, -c configuration file [Default: ./gator.json]
+	  --config, -c configuration file [Default: ./grator.json]
 	  --directory, -d  migrations directory, should contain up.sql and down.sql [Default: ./migrations]
 
 	Examples
-	  $ gator up -c gator.json	
-	  $ gator down -c gator.json -d migrations
+	  $ grator up -c grator.json	
+	  $ grator down -c grator.json -d migrations
 ```
