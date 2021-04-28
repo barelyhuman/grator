@@ -3,6 +3,7 @@ import fs from 'fs'
 import { connect } from './lib/connect.js'
 import conch from '@barelyreaper/conch'
 import ora from 'ora'
+import usage from './usage.js'
 
 const maxTries = 4
 let completedTries = 0
@@ -40,7 +41,9 @@ export async function grator (cliInput, cliArgs = { config: '', directory: '' })
         break
       }
       default: {
-        throw new Error('Please provide an instruction with the command, `up` or `down`')
+        console.log('Invalid Input, please go through the usage again')
+        console.log(usage)
+        process.exit(0)
       }
     }
 

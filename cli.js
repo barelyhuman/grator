@@ -1,19 +1,9 @@
 #!/usr/bin/env node
 import meow from 'meow'
 import { grator } from './grator.js'
+import usage from './usage.js'
 
-const cli = meow(`
-Usage
-  $ grator [up|down]
-
-Options
-  --config, -c configuration file [Default: ./grator.json]
-  --directory, -d  migrations directory, should contain up.sql and down.sql [Default: ./migrations]
-
-Examples
-  $ grator up -c grator.json
-  $ grator down -c grator.json -d migrations
-`, {
+const cli = meow(usage, {
   flags: {
     config: {
       type: 'string',
@@ -29,6 +19,10 @@ Examples
 })
 
 function main () {
+  if (cli.input.length <= 0) {
+    console.log(usage)
+    process.exit(0)
+  }
   grator(cli.input, cli.flags)
 }
 
