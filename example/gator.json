@@ -2,7 +2,7 @@
   "connection": {
     "host": "localhost",
     "port": 5432,
-    "database": "demo2",
+    "database": "demo",
     "user": "local_user",
     "password": "password",
     "max": 10,

@@ -1,9 +1,10 @@
 {
-	"name": "grator",
+	"name": "@barelyreaper/grator",
 	"version": "0.0.0",
 	"description": "A mini tool to help with migration sql files",
 	"license": "MIT",
 	"repository": "barelyhuman/grator",
+	"private":"false",
 	"author": {
 		"name": "Reaper",
 		"email": "ahoy@barelyhuman.dev",
@@ -17,7 +18,8 @@
 		"node": ">=12"
 	},
 	"scripts": {
-		"test": "xo && ava"
+		"test": "xo && ava",
+		"fix": "standard --fix ."
 	},
 	"files": [
 		"cli.js",
@@ -41,6 +43,12 @@
 	"devDependencies": {
 		"ava": "^3.15.0",
 		"execa": "^5.0.0",
+		"standard": "^16.0.3",
 		"xo": "^0.37.0"
+	},
+	"standard":{
+		"ignore":[
+			"node_modules"
+		]
 	}
 }
