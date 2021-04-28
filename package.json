@@ -1,10 +1,10 @@
 {
 	"name": "@barelyreaper/grator",
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"description": "A mini tool to help with migration sql files",
 	"license": "MIT",
 	"repository": "barelyhuman/grator",
-	"private":"false",
+	"private": false,
 	"author": {
 		"name": "Reaper",
 		"email": "ahoy@barelyhuman.dev",
@@ -46,8 +46,8 @@
 		"standard": "^16.0.3",
 		"xo": "^0.37.0"
 	},
-	"standard":{
-		"ignore":[
+	"standard": {
+		"ignore": [
 			"node_modules"
 		]
 	}
