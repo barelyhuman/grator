@@ -14,6 +14,16 @@ const cli = meow(usage, {
       type: 'string',
       default: './migrations',
       alias: 'd'
+    },
+    silent: {
+      type: 'boolean',
+      default: false,
+      alias: 's'
+    },
+    retry: {
+      type: 'number',
+      default: 3,
+      alias: 'r'
     }
   }
 })

@@ -5,19 +5,23 @@ import conch from '@barelyreaper/conch'
 import ora from 'ora'
 import usage from './usage.js'
 
-const maxTries = 4
+let maxTries = 0
 let completedTries = 0
 let queriesToRun = []
+let queryErrorLogged = false;
 
-export async function grator (cliInput, cliArgs = { config: '', directory: '' }) {
-  const spinner = ora('Starting').start()
+export async function grator (cliInput, cliArgs = { config: '', directory: '', retry: 3, silent: false }) {
+  maxTries = cliArgs.retry || 3
+  const spinner = ora({ text: 'Starting', isSilent: cliArgs.silent }).start()
   try {
     const configPath = path.resolve(cliArgs.config)
     const isConfigExists = fs.existsSync(configPath)
     spinner.text = 'Checking if config exists'
     if (!isConfigExists) {
       spinner.fail('Failed to complete migrations')
-      throw new Error("Config File doesn't exist, if you are using a custom config, please point to it using -c or --config")
+      if (!cliArgs.silent) {
+        throw new Error("Config File doesn't exist, if you are using a custom config, please point to it using -c or --config")
+      }
     }
     const config = JSON.parse(fs.readFileSync(configPath).toString())
 
@@ -28,7 +32,9 @@ export async function grator (cliInput, cliArgs = { config: '', directory: '' })
     spinner.text = 'Checking if migrations exist'
     if (!isMigrationFolderExists) {
       spinner.fail('Failed to complete migrations')
-      throw new Error("Migrations Folder doesn't exist, if you are using a different folder, please point to it using -d or --directory")
+      if (!cliArgs.silent) {
+        throw new Error("Migrations Folder doesn't exist, if you are using a different folder, please point to it using -d or --directory")
+      }
     }
 
     switch (cliInput[0]) {
@@ -64,7 +70,7 @@ export async function grator (cliInput, cliArgs = { config: '', directory: '' })
     spinner.color = 'green'
     while (completedTries < maxTries) {
       await conch(queriesToRun, (queryItem) => runQuery(dbInstance, queryItem), { limit: 1 }).catch(err => {
-        queryError(queriesToRun, err)
+        queryError(queriesToRun, err,cliArgs.silent)
       })
       completedTries += 1
       queriesToRun = queriesToRun.filter(item => !item.done)
@@ -73,7 +79,7 @@ export async function grator (cliInput, cliArgs = { config: '', directory: '' })
     if (queriesToRun.length > 0) {
       spinner.color = 'red'
       spinner.fail('Failed to complete migrations')
-      queryError(queriesToRun)
+      queryError(queriesToRun,null,cliArgs.silent)
       process.exit(1)
     }
 
@@ -81,7 +87,7 @@ export async function grator (cliInput, cliArgs = { config: '', directory: '' })
     process.exit(0)
   } catch (err) {
     spinner.fail(String(err) || 'Failed unexpectedly')
-    process.exit(1)
+    process.exit(cliArgs.silent ? 0 : 1)
   }
 }
 
@@ -90,8 +96,14 @@ async function runQuery (db, queryItem) {
   queryItem.done = true
 }
 
-function queryError (queries, err) {
+function queryError (queries, err=new Error(""),silent=false) {
+  if(queryErrorLogged){
+    return;
+  }
+  queryErrorLogged = true;
   const errorLog = queries.map(item => item.query).join(';\n\n') + '\n' + String(err)
   fs.writeFileSync('grator-error.log', errorLog)
-  console.error(new Error(`About ${queries.length} ${queries.length === 1 ? 'query' : 'queries'} failed to execute, please check them again, the failed one's can be found in grator-error.log`))
+  if (!silent) {
+    console.error(new Error(`About ${queries.length} ${queries.length === 1 ? 'query' : 'queries'} failed to execute, please check them again, the failed one's can be found in grator-error.log`))
+  }
 }
