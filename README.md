@@ -1,3 +1,5 @@
+# PACKAGE MOVED TO @barelyhuman/grator
+
 # grator
 
 Simple Utility to run migrations with a retry
