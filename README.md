@@ -8,7 +8,7 @@ cause a lot of issues when needed. The cli utility simply goes through the set o
 
 ### Installation 
 ```sh
-npm i -g @barelyreaper/grator
+npm i -g @barelyhuman/grator
 ```
 
 
