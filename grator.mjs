@@ -1,9 +1,9 @@
 import path from 'path'
 import fs from 'fs'
-import { connect } from './lib/connect.js'
+import { connect } from './lib/connect.mjs'
 import conch from '@barelyreaper/conch'
 import ora from 'ora'
-import usage from './usage.js'
+import usage from './usage.mjs'
 
 let maxTries = 0
 let completedTries = 0
@@ -37,6 +37,7 @@ export async function grator (cliInput, cliArgs = { config: '', directory: '', r
       }
     }
 
+    spinner.text = 'Reading SQL Files...'
     switch (cliInput[0]) {
       case 'up': {
         migrationFile = path.join(migrationPath, 'up.sql')

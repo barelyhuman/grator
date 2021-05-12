@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"repository": "barelyhuman/grator",
 	"private": false,
-	"source": "cli.js",
+	"source": "cli.mjs",
 	"author": {
 		"name": "Reaper",
 		"email": "ahoy@barelyhuman.dev",
@@ -13,14 +13,14 @@
 	},
 	"type": "module",
 	"bin": {
-		"grator": "dist/grator.cjs"
+		"grator": "dist/cli.cjs"
 	},
 	"engines": {
 		"node": ">=12"
 	},
 	"scripts": {
 		"test": "xo && ava",
-		"build": "microbundle && mv dist/grator.js dist/grator.cjs",
+		"build": "microbundle --no-sourcemap --target node -f cjs --o dist/cli.cjs; mv dist/cli.cjs.js dist/cli.cjs ",
 		"fix": "standard --fix ."
 	},
 	"files": [

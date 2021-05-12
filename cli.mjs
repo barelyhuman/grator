@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import meow from 'meow'
-import { grator } from './grator.js'
-import usage from './usage.js'
+import { grator } from './grator.mjs'
+import usage from './usage.mjs'
 
 const cli = meow(usage, {
   flags: {
