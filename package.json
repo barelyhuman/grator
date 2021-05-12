@@ -24,7 +24,8 @@
 	"files": [
 		"cli.js",
 		"grator.js",
-		"lib/**/*.js"
+		"lib/**/*.js",
+		"usage.js"
 	],
 	"keywords": [
 		"cli",
