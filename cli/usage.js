@@ -13,6 +13,6 @@ $ grator up -c grator.json
 $ grator down -c grator.json -d migrations
 $ grator up -c grator.json -d migrations -r 4
 $ grator up -c grator.json -d migrations -s
-`
+`;
 
-export default usage
+module.exports = usage;

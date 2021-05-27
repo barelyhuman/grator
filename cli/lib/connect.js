@@ -1,6 +1,6 @@
-import knex from 'knex'
+const knex = require('knex');
 
-export function connect (connectionConfig = {
+function connect (connectionConfig = {
   host: 'localhost',
   port: 5432,
   database: 'postgres',
@@ -15,3 +15,5 @@ export function connect (connectionConfig = {
   })
   return instance
 }
+
+exports.connect = connect 
